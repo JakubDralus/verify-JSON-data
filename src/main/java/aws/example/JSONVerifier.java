@@ -37,23 +37,22 @@ public class JSONVerifier {
         }
         catch (JSONException ignored2) {}
         
-        JSONArray statements;
         try {
-            statements = jsonObj.getJSONArray("Statement");
-        }
-        catch (JSONException ignored) {
-            return true; // because resource can only be in Statement array
-        }
-        
-        for (int i = 0; i < statements.length(); i++) {
-            JSONObject statement = statements.getJSONObject(i);
-            String resource = statement.getString("Resource");
-//            System.out.println(statement);
+            JSONArray statements = jsonObj.getJSONArray("Statement");
             
-            if (resource.equals("*")) {
-                return false;
+            for (int i = 0; i < statements.length(); i++) {
+                JSONObject statement = statements.getJSONObject(i);
+                String resource = statement.getString("Resource");
+                //            System.out.println(statement);
+                
+                if (resource.equals("*")) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        catch (JSONException e) {
+            return true;
+        }
     }
 }
