@@ -11,14 +11,16 @@ import java.nio.file.Paths;
 public class JSONVerifier {
     
     public static void main(String[] args) {
+        JSONObject jsonObj;
+        String path = "src/test/resources/input.json";
         try {
-            String path = "src/test/resources/input.json";
-            JSONObject jsonObj = readJsonFile(path);
-            System.out.println("result: " + verifyJSON(jsonObj));
+            jsonObj = readJsonFile(path);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            String errorMessage = "Error while reading JSON file: " + path;
+            throw new RuntimeException(errorMessage, e);
         }
+        System.out.println("result: " + verifyJSON(jsonObj));
     }
     
     private static JSONObject readJsonFile(String path) throws IOException {
@@ -41,9 +43,9 @@ public class JSONVerifier {
         for (int i = 0; i < statements.length(); i++) {
             JSONObject statement = statements.getJSONObject(i);
             String resource = statement.getString("Resource");
-//            System.out.println(statement);
+            System.out.println(statement);
             
-            if ("*".equals(resource)) {
+            if (resource.equals("*")) {
                 return false;
             }
         }
