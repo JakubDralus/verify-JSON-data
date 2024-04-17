@@ -3,48 +3,45 @@ package aws.example;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JSONVerifierTest {
-    private static JSONObject readJsonFile(String path) throws IOException {
-        String jsonString = new String(Files.readAllBytes(Paths.get(path)));
-        return new JSONObject(jsonString);
-    }
+    
+    String resourcesPath = "src/test/resources/";
     
     @Test
-    void verifyJSON_Input1() throws IOException {
-        String resourcesPath = "src/test/resources/";
+    void verifyJSON_Input1() {
         String path = resourcesPath + "input.json";
-        JSONObject jsonObj = readJsonFile(path);
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
         assertFalse(JSONVerifier.verifyJSON(jsonObj));
     }
     
     @Test
-    void verifyJSON_Input2() throws IOException {
-        String resourcesPath = "src/test/resources/";
+    void verifyJSON_Input2() {
         String path = resourcesPath + "input2.json";
-        JSONObject jsonObj = readJsonFile(path);
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
         assertFalse(JSONVerifier.verifyJSON(jsonObj));
     }
     
     @Test
-    void verifyJSON_Input3() throws IOException {
-        String resourcesPath = "src/test/resources/";
+    void verifyJSON_Input3()  {
         String path = resourcesPath + "input3.json";
-        JSONObject jsonObj = readJsonFile(path);
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
         assertTrue(JSONVerifier.verifyJSON(jsonObj));
     }
     
     @Test
-    void verifyJSON_Input4() throws IOException {
-        String resourcesPath = "src/test/resources/";
+    void verifyJSON_Input4() {
         String path = resourcesPath + "input4.json";
-        JSONObject jsonObj = readJsonFile(path);
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
         assertTrue(JSONVerifier.verifyJSON(jsonObj));
     }
     
+    @Test
+    void verifyJSON_Input5() {
+        String path = resourcesPath + "input5.json";
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
+        assertTrue(JSONVerifier.verifyJSON(jsonObj));
+    }
 }
