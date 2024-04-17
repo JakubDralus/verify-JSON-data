@@ -51,4 +51,11 @@ class JSONVerifierTest {
         JSONObject jsonObj = JSONVerifier.readJsonFile(path);
         assertTrue(JSONVerifier.verifyJSON(jsonObj));
     }
+    
+    @Test
+    void verifyJSON_Input7() {
+        String path = resourcesPath + "input7.json";
+        JSONObject jsonObj = JSONVerifier.readJsonFile(path);
+        assertFalse(JSONVerifier.verifyJSON(jsonObj));
+    }
 }
